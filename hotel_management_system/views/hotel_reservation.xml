@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!-- Data records go here -->
+    <!-- Open View in this files -->
+    <record id='hotel_reservation_action' model='ir.actions.act_window'>
+        <field name="name">Room Reservations</field>
+        <field name="res_model">hotel.reservation</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+     <record id="hotel_room_facility_view_form" model="ir.ui.view">
+        <field name="name">Hotel Room Facility Form</field>
+        <field name="model">res.partner</field>
+        <field name="arch" type="xml">
+
+            <form>
+                <group>
+                    <field name="name"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record id="hotel_reservation_view_form" model="ir.ui.view">
+        <field name="name">Hotel Room Reservation Form</field>
+        <field name="model">hotel.reservation</field>
+        <field name="arch" type="xml">
+
+            <form>
+                 <header>
+                    <button name="make_confirmed" string="Confirm" type="object" class="btn btn-outline-primary" attrs="{'invisible': [('state', '!=', 'draft')]}"/>
+                    <button name="cancel_reservation" string="Cancel Reservation" type="object" class="btn btn-outline-primary" attrs="{'invisible': [('state', '=', 'cancel')]}"  />
+                    <button name="make_draft" string="Draft" type="object" class="btn btn-outline-primary"/>
+                    <field name="state" widget="statusbar" options="{'clickable':'1'}"/>
+                 </header>
+                <group>
+                    <group>
+                        <field name="client_name" attrs="{'readonly': [('state', 'in', ['confirmed','cancel'])]}"/>
+                        <field name="phone_number" attrs="{'readonly':1}"/>
+                        <field name="employee_name"/>
+                    </group>
+                    <group>
+                        <field name="reservation_date" attrs="{'readonly': [('state', 'in', ['confirmed','cancel'])]}"/>
+                    </group>
+                    <group>
+                        <field name="checkin_date" attrs="{'readonly': [('state', 'in', ['confirmed','cancel'])]}"/>
+                        <field name="checkout_date" attrs="{'readonly': [('state', 'in', ['confirmed','cancel'])]}"/>
+                        <field name="attachment_ids" widget="many2many_binary" options="{'no_create': True}"/>
+                    </group>
+                    <field name="room_ids" domain="[('room_state','=','unoccupied')]" attrs="{'readonly': [('state', 'in', ['confirmed','cancel'])]}">
+                            <tree>
+                                 <field name="name"/>
+                                <field name="room_view"/>
+                                <field name="room_type"/>
+                                <field name="number_of_beds"/>
+                            </tree>
+                    </field>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </group>
+            </form>
+        </field>
+    </record>
+
+     <record id="hotel_room_reservation_view_tree" model="ir.ui.view">
+        <field name="name">hotel reservations list</field>
+        <field name="model">hotel.reservation</field>
+        <field name="arch" type="xml">
+
+            <tree>
+                <field name="client_name" />
+                <field name="phone_number"/>
+                <field name="room_ids" widget="many2many_tags"/>
+                <field name="reservation_date"/>
+                <field name="state"/>
+                <field name="checkin_date"/>
+                <field name="checkout_date"/>
+                <field name="employee_name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="hotel_reservation_view_search" model="ir.ui.view">
+        <field name="name">hotel reservations Search</field>
+        <field name="model">hotel.reservation</field>
+        <field name="arch" type="xml">
+            <search>
+                <filter string="Room Name" name="room_ids" context="{'group_by': 'room_ids'}"/>
+            </search>
+        </field>
+    </record>
+
+
+</odoo>

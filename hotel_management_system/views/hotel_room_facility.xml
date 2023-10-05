@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!-- Data records go here -->
+    <!-- Open View in this files -->
+    <record id='hotel_room_facility_action' model='ir.actions.act_window'>
+        <field name="name">Rooms Facilities</field>
+        <field name="res_model">hotel.room.facility</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+     <record id="hotel_room_facility_view_form" model="ir.ui.view">
+        <field name="name">Hotel Room Facility Form</field>
+        <field name="model">hotel.room.facility</field>
+        <field name="arch" type="xml">
+
+            <form>
+                <group>
+                    <field name="name"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+     <record id="hotel_room_facility_view_tree" model="ir.ui.view">
+        <field name="name">hotel Room Facility list</field>
+        <field name="model">hotel.room.facility</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+</odoo>

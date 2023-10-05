@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="hotel_wizard_template">
+         <t t-call="web.html_container">
+             <t t-foreach="docs" t-as="doc">
+                <t t-call="web.internal_layout">
+                    <div class="page">
+                        <div class="oe structure"/>
+                        <div class="text-center">
+                            <h1>Hotel reservations<span> ( </span> <t t-esc="doc.reservation_from"/><span> - </span> <t t-esc="doc.reservation_to"/><span> ) </span></h1>
+                        </div>
+                        <table class="table table-condensed">
+                            <thead>
+                                <tr>
+                                    <th>Reservation Date</th>
+                                    <th>Client</th>
+                                    <th>State</th>
+                                    <th>Rooms</th>
+                                </tr>
+
+                            </thead>
+                            <tr  t-foreach="doc.print_report()" t-as="res">
+                                <td><t t-esc = "res.reservation_date"/> </td>
+                                <td ><t t-esc = "res.client_name.name"/></td>
+                                <td><t t-esc = "res.state"/></td>
+                                <td>
+                                    <ul>
+                                        <t t-foreach="res.room_ids" t-as="room">
+                                            <span t-field="room.name"/>
+                                            <span>-</span>
+                                        </t>
+                                    </ul>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

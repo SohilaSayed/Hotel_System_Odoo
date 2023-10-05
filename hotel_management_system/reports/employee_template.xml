@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="employee_template">
+         <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <center><h1>Employee reservation</h1></center>
+                    <center><h2><t t-foreach="request.env['employee.report'].search([])" t-as="res"/><span t-field="res.employee"/></h2></center>
+
+                     <table class="table table-condensed">
+                         <thead>
+                             <tr>
+                                 <th>Employee</th>
+                                 <th>Draft Rooms</th>
+                                 <th>Confirmed Rooms</th>
+                                 <th>Canceled Rooms</th>
+                             </tr>
+                             </thead>
+                         <tbody>
+                             <t t-foreach="values" t-as="record">
+                                 <tr>
+                                    <td><t t-esc="record[0]"/></td>
+                                    <td><t t-esc="record[1]"/></td>
+                                    <td><t t-esc="record[2]"/></td>
+                                    <td><t t-esc="record[3]"/></td>
+                                </tr>
+                             </t>
+
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

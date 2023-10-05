@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+     <record id="report_employee" model="ir.actions.report">
+         <field name="name">Employees Reservations</field>
+         <field name="model">employee.report</field>
+         <field name="report_type">qweb-pdf</field>
+         <field name="report_name">hotel_management_system.employee_template</field>
+         <field name="report_file">hotel_management_system.employee_template</field>
+         <field name="binding_model_id" ref="model_employee_report"/>
+         <field name="binding_type">report</field>
+    </record>
+</odoo>

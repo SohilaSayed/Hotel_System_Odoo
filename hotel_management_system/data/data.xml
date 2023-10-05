@@ -1,0 +1,27 @@
+<odoo noupdate="1">
+     <record id="room1" model="hotel.room">
+         <field name="room_number">56</field>
+         <field name="floor_number">6</field>
+         <field name="room_state" >unoccupied</field>
+     </record>
+    <record id="room2" model="hotel.room">
+         <field name="room_number">57</field>
+         <field name="floor_number">6</field>
+         <field name="room_state" >unoccupied</field>
+     </record>
+      <record id="room3" model="hotel.room">
+         <field name="room_number">58</field>
+         <field name="floor_number">6</field>
+         <field name="room_state" >unoccupied</field>
+     </record>
+      <record id="room4" model="hotel.room">
+         <field name="room_number">59</field>
+         <field name="floor_number">6</field>
+         <field name="room_state" >unoccupied</field>
+     </record>
+      <record id="room5" model="hotel.room">
+         <field name="room_number">55</field>
+         <field name="floor_number">6</field>
+         <field name="room_state" >unoccupied</field>
+     </record>
+</odoo>

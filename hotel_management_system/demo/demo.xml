@@ -1,0 +1,19 @@
+<odoo>
+    <data>
+          <record id="room1" model="hotel_management_system.hotel_room">
+            <field name="room_number">88</field>
+            <field name="floor_number">8</field>
+          </record>
+
+          <record id="room2" model="hotel_management_system.hotel_room">
+            <field name="room_number">99</field>
+            <field name="floor_number">9</field>
+          </record>
+
+          <record id="room3" model="hotel_management_system.hotel_room">
+            <field name="room_number">111</field>
+            <field name="floor_number">11</field>
+          </record>
+
+    </data>
+</odoo>

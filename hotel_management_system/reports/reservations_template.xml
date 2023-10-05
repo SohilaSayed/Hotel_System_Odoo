@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="reservations_template">
+         <t t-call="web.html_container">
+             <t t-foreach="docs" t-as="doc">
+                <t t-call="web.internal_layout">
+                    <div class="page">
+                        <h1>Hotel reservation for <t t-esc="doc.name"/></h1>
+                         <table class="table table-condensed">
+                             <thead>
+                                 <tr>
+                                     <th>Room Name</th>
+                                     <th>Reservation Date</th>
+                                     <th>Check In Date</th>
+                                     <th>Check Out Date</th>
+                                     <th>Reservation State</th>
+                                 </tr>
+                                 </thead>
+                             <tbody>
+                                <tr t-foreach="doc.reservation_history_ids" t-as="res" >
+                                    <t t-if="res.state == 'confirmed'">
+                                        <td>
+                                            <ul>
+                                                <t t-foreach="res.room_ids" t-as="room">
+                                                    <span t-field="room.name"/>
+                                                    <span>-</span>
+                                                </t>
+                                            </ul>
+                                        </td>
+                                        <td><t t-esc="res.reservation_date"/></td>
+                                        <td><t t-esc="res.checkin_date"/></td>
+                                        <td><t t-esc="res.checkout_date"/></td>
+                                        <td><t t-esc="res.state"/></td>
+                                    </t>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

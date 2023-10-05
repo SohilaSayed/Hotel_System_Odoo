@@ -1,0 +1,10 @@
+.ribbon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: #ff9900;
+    color: white;
+    padding: 5px 10px;
+    transform: rotate(45deg);
+    transform-origin: top right;
+}

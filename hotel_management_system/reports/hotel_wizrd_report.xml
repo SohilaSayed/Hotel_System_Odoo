@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+     <record id="report_wizard" model="ir.actions.report">
+         <field name="name">Hotel Wizard</field>
+         <field name="model">reservation.report</field>
+         <field name="report_type">qweb-pdf</field>
+         <field name="report_name">hotel_management_system.hotel_wizard_template</field>
+         <field name="report_file">hotel_management_system.hotel_wizard_template</field>
+         <field name="binding_model_id" ref="model_reservation_report"/>
+         <field name="binding_type">report</field>
+    </record>
+</odoo>

@@ -1,0 +1,19 @@
+<odoo>
+    <menuitem name="Hotel" id="hotel_room_base_menu"  web_icon="hotel_management_system,static/description/icon.png"/>
+
+    <menuitem name="Rooms" id="rooms_menu" parent="hotel_room_base_menu" action="hotel_room_action" sequence="1"/>
+
+    <menuitem name="Contacts" id="contacts_menu" parent="hotel_room_base_menu" action="contacts.action_contacts" sequence="2"/>
+
+    <menuitem name="Reservations" id="reservations_menu" parent="hotel_room_base_menu" action="hotel_reservation_action" sequence="3"/>
+
+    <menuitem name="Reporting" id="reporting_menu" parent="hotel_room_base_menu" sequence="4" />
+        <menuitem name="Reservations Report" id="reporting_reservation_menu" parent="reporting_menu" sequence="1" action="action_hotel_wizard"/>
+        <menuitem name="Employees Report" id="reporting_employees_menu" parent="reporting_menu" sequence="2" action="action_employee_wizard"/>
+
+    <menuitem name="Configuration" id="configuration_menu" parent="hotel_room_base_menu" sequence="5"/>
+        <menuitem name="Facilities" id="facilities_menu" parent="configuration_menu" action="hotel_room_facility_action"/>
+        <menuitem id="menu_action_hotel_reservation_statistics" name="Reservation Statistics" parent="configuration_menu" action="action_hotel_reservation_statistics"/>
+
+
+</odoo>

@@ -1,0 +1,21 @@
+<odoo>
+
+    <record model="ir.rule" id="hotel_management_user_rule">
+        <field name="name">Global Rule : for hotel employees</field>
+        <field name="model_id" ref="model_hotel_room"/>
+        <field name="domain_force">
+            ['|',('create_uid','=',False),('create_uid','=',user.id)]
+        </field>
+        <field name="perm_create" eval="False"/>
+        <field name="global" eval="True"/>
+    </record>
+</odoo>
+
+
+
+
+
+
+
+
+

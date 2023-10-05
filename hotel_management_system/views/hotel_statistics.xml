@@ -1,0 +1,33 @@
+<odoo>
+    <record id="action_hotel_reservation_statistics" model="ir.actions.act_window">
+        <field name="name">Hotel Reservation Statistics</field>
+        <field name="res_model">hotel.reservation.statistic</field>
+        <field name="view_mode">graph,pivot</field>
+    </record>
+
+    <record id="view_hotel_statistics_graph" model="ir.ui.view">
+        <field name="name">hotel.reservation.statistics.graph</field>
+         <field name="model">hotel.reservation.statistic</field>
+         <field name="arch" type="xml">
+             <graph string = "Reservations" type="bar">
+                 <field name="partner_id"/>
+                 <field name="res_id"/>
+                 <field name="number_of_reserved_rooms"/>
+                 <field name="number_of_beds"/>
+             </graph>
+         </field>
+    </record>
+
+    <record id="view_hotel_statistics_pivot" model="ir.ui.view">
+     <field name="model">hotel.reservation.statistic</field>
+     <field name="arch" type="xml">
+         <pivot>
+             <field name="partner_id" type="column"/>
+             <field name="res_id" type="raw"/>
+             <field name="number_of_reserved_rooms" operator="sum" type="measure"/>
+             <field name="number_of_beds"  operator="sum" type="measure"/>
+         </pivot>
+     </field>
+    </record>
+</odoo>
+

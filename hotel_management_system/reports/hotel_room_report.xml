@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+     <record id="report_reservation" model="ir.actions.report">
+         <field name="name">Hotel Reservations</field>
+         <field name="model">res.partner</field>
+         <field name="report_type">qweb-pdf</field>
+         <field name="report_name">hotel_management_system.reservations_template</field>
+         <field name="report_file">hotel_management_system.reservations_template</field>
+         <field name="binding_model_id" ref="model_res_partner"/>
+         <field name="binding_type">report</field>
+    </record>
+</odoo>

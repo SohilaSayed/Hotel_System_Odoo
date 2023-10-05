@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!-- Data records go here -->
+    <!-- Open View in this files -->
+    <record id='hotel_room_action' model='ir.actions.act_window'>
+        <field name="name">Rooms</field>
+        <field name="res_model">hotel.room</field>
+        <field name="view_mode">tree,form,kanban</field>
+    </record>
+
+    <record id="hotel_room_view_form" model="ir.ui.view">
+        <field name="name">Hotel Room Form</field>
+        <field name="model">hotel.room</field>
+        <field name="arch" type="xml">
+
+            <form>
+                <field name="active" invisible="1"/>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                     <button class="oe_stat_button" name="%(hotel_room_action)d" type="action" icon="fa-hotel">
+                        <field string="Reserved Rooms" name="num_of_reserved_rooms" widget="statinfo"/>
+                     </button>
+                    </div>
+                    <widget name="web_ribbon" title="Occupied" bg_color="bg-success" attrs="{'invisible': [('room_state', '!=', 'occupied')]}"/>
+                    <group>
+                        <group>
+                            <h1>
+                                <field name="name"/>
+                            </h1>
+                        </group>
+                        <notebook>
+                            <page string="Description">
+                                <group>
+                                    <field name="room_number" string = "Room Number"/>
+                                    <field name="floor_number" string="Floor Number"/>
+                                    <field name="tags"  widget="many2many_tags"/>
+                                    <field name="number_of_beds" string="Number of Beds"/>
+                                     <field name="room_view"/>
+                                    <field name="room_type"/>
+                                    <field name="room_state"/>
+                                    <field name="additional_notes"/>
+                                </group>
+
+                            </page>
+                        </notebook>
+                    </group>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+     <record id="hotel_room_view_tree" model="ir.ui.view">
+        <field name="name">hotel list</field>
+        <field name="model">hotel.room</field>
+        <field name="arch" type="xml">
+            <tree string = "Hotel" >
+                <field name="room_number" />
+                <field name="floor_number" />
+                <field name="tags"  widget="many2many_tags"/>
+                <field name="name"/>
+                <field name="room_view"/>
+                <field name="room_type"/>
+                <field name="room_state" decoration-danger = "room_state == 'under maintenance'" decoration-muted = "room_state == 'occupied'"/>
+                <button name="make_occupied" string="Check In" type="object" class="btn btn-outline-primary" attrs="{'invisible': [('room_state', '!=', 'reserved')]}"/>
+                <button name="make_unoccupied" string="Check out" type="object" class="btn btn-outline-primary" attrs="{'invisible': [('room_state', '!=', 'occupied')]}"/>
+                <button name="view_history" string="History" type="object" class="btn btn-outline-primary"/>
+            </tree>
+        </field>
+    </record>
+    <record id="hotel_room_view_search" model="ir.ui.view">
+        <field name="name">Hotel Room Search</field>
+        <field name="model">hotel.room</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="room_number"/>
+                <field name="floor_number"/>
+                <field name="tags" />
+                <field name="name"/>
+                <field name="room_view"/>
+                <field name="room_type"/>
+                <field name="room_state"/>
+                <field name="number_of_beds"/>
+                <filter string="Unoccupied"
+                name="room_state"
+                domain="[('room_state','=','unoccupied')]"/>
+                <filter string="Occupied"
+                name="room_state"
+                domain="[('room_state','=','occupied')]"/>
+                <group expand="0" string="Group By">
+                    <filter string="State" name="state" context="{'group_by': 'room_state'}"/>
+                    <filter string="Type" name="type" context="{'group_by': 'room_type'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    <record id="hotel_room_view_form_minimal" model="ir.ui.view">
+      <field name="name">hotel.room.Form</field>
+      <field name="model">hotel.room</field>
+      <field name="arch" type="xml">
+            <form>
+               <group>
+                    <field name="room_number"/>
+                    <field name="floor_number"/>
+                    <field name="tags" widget="many2many_tags"/>
+                    <field name="room_state"/>
+               </group>
+            </form>
+      </field>
+    </record>
+    <record id="view_hotel_room_kanban" model="ir.ui.view">
+    <field name="name">hotel.room.kanban</field>
+    <field name="model">hotel.room</field>
+    <field name="arch" type="xml">
+        <kanban default_group_by="room_state" class="o_kanban_small_column o_opportunity_kanban" quick_create_view="hotel_management_system.hotel_room_view_form_minimal" on_create="quick_create">
+            <field name="room_state"/>
+            <field name="activity_state"/>
+            <progressbar field="room_state" colors='{"occupied": "success", "reserved": "warning", "unoccupied": "danger" ,"under maintenance":"secondary" }'/>
+            <progressbar field="activity_state" colors='{"planned": "success", "today": "warning", "overdue": "danger"}'/>
+             <templates style="margin-bottom:10px;">
+                    <t t-name="kanban-box" >
+                        <div class="oe_kanban_global_click">
+
+                            <div class="oe_kanban_details" >
+                                <ul>
+                                    <li class="oe_kanban_title"  >
+                                         <h2 class="mb32" style="font-family: 'Lato';">
+                                             <field name="name"/>
+                                         </h2>
+                                    </li>
+                                    <li class="oe_kanban_card_field">
+                                        <span style="font-size:14px;font-family: 'Lato';">
+                                         Number of beds :<span><field name="number_of_beds"/></span>
+                                        </span>
+                                    </li>
+                                   <li class="oe_kanban_card_field">
+                                       <span style="font-size:14px;font-family: 'Lato';">
+                                         Room view: <field name="room_view"/>
+                                       </span>
+                                   </li>
+                                    <li class="oe_kanban_card_field">
+                                        <span style="font-size:14px;font-family: 'Lato';">
+                                        Room type: <field name="room_type"/>
+                                        </span>
+                                   </li>
+                                    <li class="oe_kanban_card_field">
+                                        <span style="font-size:14px;font-family: 'Lato';">
+                                        Facilities: <field name="tags"/>
+                                        </span>
+                                    </li>
+                                    <li>
+                                         <field name="activity_ids" widget="kanban_activity"/>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+</odoo>
